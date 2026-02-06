@@ -1,0 +1,12 @@
+[project]
+name = "calculator-fastmcp"
+version = "0.1.0"
+description = "Simple calculator MCP server using FastMCP"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.3.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
