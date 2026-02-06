@@ -2,10 +2,12 @@
 Simple Calculator MCP - Built with FastMCP
 ===========================================
 
-A minimal MCP server using FastMCP (the fast, Pythonic way).
+A minimal MCP server using FastMCP with SSE transport.
 
 To run locally:
     python main.py
+
+Server will run at: http://127.0.0.1:8000/mcp
 
 To deploy to Dedalus:
     1. Push this folder to GitHub
@@ -17,8 +19,8 @@ To deploy to Dedalus:
 
 from mcp.server.fastmcp import FastMCP
 
-# Create FastMCP server
-mcp = FastMCP("calculator-fast")
+# Create FastMCP server with SSE transport
+mcp = FastMCP("calculator-fast", transport="sse")
 
 
 @mcp.tool()
@@ -49,4 +51,5 @@ def divide(a: float, b: float) -> float:
 
 if __name__ == "__main__":
     print("Starting FastMCP Calculator Server...")
-    mcp.run()
+    print("Server running at: http://127.0.0.1:8000/mcp")
+    mcp.run(transport="sse", host="0.0.0.0", port=8000, path="/mcp")
