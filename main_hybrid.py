@@ -1,27 +1,19 @@
 """
-Calculator MCP - Using dedalus-mcp for Dedalus Compatibility
-=============================================================
+Hybrid Approach: FastMCP-style tools + dedalus-mcp server
+==========================================================
 
-Originally built with FastMCP, but converted to dedalus-mcp
-to work with Dedalus's deployment infrastructure.
+This uses dedalus-mcp framework (which works on Dedalus deployment)
+but with the same simple decorator syntax that FastMCP offers.
 
-The @tool decorator syntax is similar to FastMCP!
-
-To run locally:
-    python main.py
-
-To deploy to Dedalus:
-    1. Push this folder to GitHub
-    2. Go to https://dedaluslabs.ai/dashboard
-    3. Click "Add Server"
-    4. Connect your repo
-    5. Deploy
+The goal: Get the best of both worlds!
 """
 
 import asyncio
 from dedalus_mcp import MCPServer, tool
 
 
+# Define tools using dedalus-mcp @tool decorator
+# (Similar syntax to FastMCP)
 @tool(description="Add two numbers together")
 def add(a: int, b: int) -> int:
     """Add two numbers and return the result."""
@@ -49,18 +41,19 @@ def divide(a: float, b: float) -> float:
 
 
 async def main():
-    """Create and run the MCP server."""
+    """Create server and register tools - dedalus-mcp style."""
     # Create dedalus-mcp server
-    server = MCPServer("calculator-fastmcp")
+    server = MCPServer("calculator-hybrid")
 
     # Collect all tools
     server.collect(add, subtract, multiply, divide)
 
-    # Start server using dedalus-mcp's serve() pattern
-    # This is what Dedalus deployment expects!
+    # Start server with dedalus-mcp's serve() method
+    # This is what Dedalus deployment infrastructure expects!
     await server.serve(port=8000)
 
 
 if __name__ == "__main__":
-    print("Starting Calculator MCP Server (dedalus-mcp compatible)...")
+    print("Starting Hybrid Calculator Server (dedalus-mcp compatible)...")
+    print("Using dedalus-mcp @tool decorators (FastMCP-style syntax)")
     asyncio.run(main())

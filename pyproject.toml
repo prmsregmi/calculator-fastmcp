@@ -1,12 +1,10 @@
 [project]
 name = "calculator-fastmcp"
-version = "0.1.0"
-description = "Simple calculator MCP server using FastMCP with SSE transport"
+version = "0.2.0"
+description = "Simple calculator MCP server using dedalus-mcp (was FastMCP)"
 requires-python = ">=3.10"
 dependencies = [
-    "fastmcp>=0.3.0",
-    "uvicorn>=0.23.0",
-    "sse-starlette>=1.6.0",
+    "dedalus-mcp>=0.1.0",
 ]
 
 [build-system]
