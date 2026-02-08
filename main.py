@@ -19,8 +19,8 @@ To deploy to Dedalus:
 
 from mcp.server.fastmcp import FastMCP
 
-# Create FastMCP server with SSE transport
-mcp = FastMCP("calculator-fast", transport="sse")
+# Create FastMCP server with HTTP transport (Streamable HTTP)
+mcp = FastMCP("calculator-fast")
 
 
 @mcp.tool()
@@ -52,4 +52,4 @@ def divide(a: float, b: float) -> float:
 if __name__ == "__main__":
     print("Starting FastMCP Calculator Server...")
     print("Server running at: http://127.0.0.1:8000/mcp")
-    mcp.run(transport="sse", host="0.0.0.0", port=8000, path="/mcp")
+    mcp.run(transport="http", host="0.0.0.0", port=8000, path="/mcp")
